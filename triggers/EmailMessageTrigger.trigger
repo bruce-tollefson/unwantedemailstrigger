@@ -8,7 +8,7 @@ trigger EmailMessageTrigger on EmailMessage (before insert) {
     
     Set<Id> caseIdSet = new Set<Id>();
     for(EmailMessage em :Trigger.New){
-        if(!em.Incoming) return;//this shouldn't fire on emails being sent out
+        if(!em.Incoming) continue;//this shouldn't fire on emails being sent out
         Boolean match = p.matcher(em.Headers).find();//you have to look at the header as the toAddress will be the routing address, to test send an email directly to the service address
         
         if(!match){
